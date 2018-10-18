@@ -1,0 +1,295 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Midterm Revision]{Midterm Revision 1} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{In Son Zeng} % Your name
+\institute[University of Michigan] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+University of Michigan \\ % Your institution for the title page
+\medskip
+\textit{insonz@umich.edu} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%------------------------------------------------
+
+\subsection{Concepts} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into 
+
+\begin{frame}
+\frametitle{Probability Key Words}
+\begin{itemize}
+\item Either, or $\rightarrow$ union $P(A\cup B)$
+\item Both, all $\rightarrow$ intersection $P(A\cap B)$
+\item At least one $\rightarrow$ Complement of $P(X=0)$
+\item Neither nor $\rightarrow$ $P(A^c \cap B^c) = 1 - P(A\cup B)$ 
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Independence in Joint Distribution}
+\begin{block}{Block 1}
+If random variables $X_1, X_2, ...... , X_n$ are independent, then
+\begin{itemize}
+\item If $X_1, X_2, ......, X_n$ are jointly discrete, $p(x_1, x_2, ......., x_n) = p_{X_1}(x_1) \cdot p_{X_2}(x_2) \cdot ...... \cdot p_{X_n}(x_n)$
+\item If $X_1, X_2, ......, X_n$ are jointly continuous, $f(x_1, x_2, ......., x_n) = f_{X_1}(x_1) \cdot f_{X_2}(x_2) \cdot ...... \cdot f_{X_n}(x_n)$
+\end{itemize}
+\end{block}
+
+\begin{block}{Block 2}
+\begin{itemize}
+\item If $X,Y$ are independent and jointly discrete, and given respectively the marginal of x $p_X(x)>0$ and marginal of y $p_Y(y)>0$, then $p(x,y) = p_{X}(x) \cdot p_{Y}(y) = p_{Y|X}(y|x) \cdot p_{X}(x) = p_{X|Y}(x|y) \cdot p_{Y}(y)$
+\item If $X,Y$ are independent and jointly continuous, and given respectively the marginal of x $f_X(x)>0$ and marginal of y $f_Y(y)>0$, then $f(x,y) = f_{X}(x) \cdot f_{Y}(y) = f_{Y|X}(y|x) \cdot f_{X}(x) = f_{X|Y}(x|y) \cdot f_{Y}(y)$
+\end{itemize}
+\end{block}
+
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Deriving Joint and Marginal Distribution}
+\textbf{Joint and Marginal Distribution}
+
+Let us define a joint distribution $f_{X,Y}(x,y)$ on $a\le x \le b$ and $c\le y \le d$
+\begin{enumerate}
+\item $f_{X,Y}(x,y) =\begin{cases}
+			p.d.f, & \text{if $a\le x \le b$, $c\le y \le d$}\\
+            0, & \text{otherwise}
+		 \end{cases}$
+\item $f_X(x) =\begin{cases}
+			\int_c^d f_{X,Y}(x,y)dy, & \text{if $a\le x \le b$}\\
+            0, & \text{otherwise}
+		 \end{cases}$
+
+
+\item $f_Y(y) =\begin{cases}
+			\int_a^b f_{X,Y}(x,y)dx, & \text{if $c\le y \le d$ }\\
+            0, & \text{otherwise}
+		 \end{cases}$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Deriving Conditional Distribution}
+\textbf{Conditional Distribution}
+Let us define a joint distribution $f_{X,Y}(x,y)$ on $a\le x \le b$ and $c\le y \le d$. Also, let $f_X(x)>0, f_Y(y) >0$, then
+\begin{enumerate}
+\item $f_{X|Y}(x|y) =\begin{cases}
+			\frac{f_{X,Y}(x,y)}{f_Y(y)} = \frac{f_{X,Y}(x,y)}{\int_a^b f_{X,Y}(x,y)dx}, & \text{if $a\le x \le b$, $c\le y \le d$}\\
+            0, & \text{otherwise}
+		 \end{cases}$
+\item $f_{Y|X}(y|x) =\begin{cases}
+			\frac{f_{X,Y}(x,y)}{f_X(x)} = \frac{f_{X,Y}(x,y)}{\int_c^d f_{X,Y}(x,y)dy}, & \text{if $a\le x \le b$, $c\le y \le d$}\\
+            0, & \text{otherwise}
+		 \end{cases}$
+
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Test Reminders}
+
+Let us be careful about the following points during the exam 1:
+
+\begin{enumerate}
+\item If the notation f(x) appears on test questions, it means that X is a continuous random
+variable. On the other hand, if the notation p(x) appears on test questions, it means that X is a discrete
+random variable.
+\item Unit is important! Do try to include the unit when answering the test problems. Misplace
+unit can be a serious problem.
+\item Do not lose point by not writing the 0 otherwise, whenever you encounter a question
+asking you to write down a probability distribution.
+\item When you take a square root of variance to obtain the standard deviation, be sure to
+include the absolute value. It is because standard deviation is the positive square root of the variance.
+
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Test Reminders}
+
+Let us be careful also about the following points during the exam 1:
+
+\begin{enumerate}
+\item You need to specify the
+probability correctly. For example, "What is the probability that the reaction time for a randomly selected person is greater than 1.00 second?" Then you have to answer $P(X > 1.00)$. If the question becomes “greater than or equal to 1.00 second”
+or “at least 1.00 second”, then you should answer $P(X \ge 1.00)$ to receive full credit.
+\item To derive the standard deviation for the summation of independent random variables, say $X_1+X_2+......+X_n$,
+please compute the variance first by formula $Var(X_1 + X_2 + ...... + X_n) = Var(X_1) + ...... + Var(X_n)$.
+Then, you can take the square root to obtain the standard deviation. Do not directly add the standard
+deviations.
+
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------
+
+\section{Second Section}
+\subsection{Sample Questions}
+
+
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Extra Questions}
+\begin{block}{Question 1}
+Some people love drinking apple cider. In Walgreen, a student observes that a 2 liter apple cider contains 200 grams of sugar. Assuming that the concentration of sugar per liter follows a Poisson distribution $Poisson(\lambda)$
+\begin{itemize}
+\item What is the concentration of sugar per liter?
+\item What is the uncertainty of that concentration?
+\item If now a bottle of 5 liter apple cider is observed to have 500 grams of sugar, what will be the uncertainty of that concentration?
+\end{itemize}
+\end{block}
+
+\begin{block}{Solution:}
+
+\end{block}
+
+
+\end{frame}
+
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Extra Questions}
+\begin{block}{Question 2}
+Given $X_1, X_2, X_3$ are independent random variables. Suppose that $E(X_1) = 2, E(X_2) = 3, E(X_3) = 5$, and $Var(X_1) = 10, Var(X_2) = 3, Var(X_3) = 2$. Then find the following:
+\begin{itemize}
+\item What is $E(2X_1 - 3X_2 + 5X_3 +2 + c)$ for a constant c?
+\item What is $Var(X_1 - 3X_2 + 4X_3 - 10)$?
+\item What is $Var(-2X_1 - 3X_2 - X_1 + 3X_3 + 1.5)$?
+\item What is $SD(X_2 + X_3 -5)$?
+\item What is $SD(-X_1 + 6X_2 - 1.5 X_3 -1)$?
+\end{itemize}
+\end{block}
+
+\begin{block}{Solution:}
+
+\end{block}
+
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\Huge{\centerline{The End}}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
