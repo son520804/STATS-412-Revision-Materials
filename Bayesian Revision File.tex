@@ -1,0 +1,471 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Bayesian Midterm Revision]{Bayesian Midterm Revision} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{In Son Zeng} % Your name
+\institute[University of Michigan] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+University of Michigan \\ % Your institution for the title page
+\medskip
+\textit{insonz@umich.edu} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%------------------------------------------------
+
+\subsection{Concepts} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into 
+
+\begin{frame}
+\frametitle{Bayesian and Frequentist}
+\begin{itemize}
+\item Either, or $\rightarrow$ union $P(A\cup B)$
+\item Both, all $\rightarrow$ intersection $P(A\cap B)$
+\item At least one $\rightarrow$ Complement of $P(X=0)$
+\item Neither nor $\rightarrow$ $P(A^c \cap B^c) = 1 - P(A\cup B)$ 
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Deriving Conditional Distribution}
+\textbf{Conditional Distribution}
+Let us define a joint distribution $f_{X,Y}(x,y)$ on $a\le x \le b$ and $c\le y \le d$. Also, let $f_X(x)>0, f_Y(y) >0$, then
+\begin{enumerate}
+\item $f_{X|Y}(x|y) =\begin{cases}
+			\frac{f_{X,Y}(x,y)}{f_Y(y)} = \frac{f_{X,Y}(x,y)}{\int_a^b f_{X,Y}(x,y)dx}, & \text{if $a\le x \le b$, $c\le y \le d$}\\
+            0, & \text{otherwise}
+		 \end{cases}$
+\item $f_{Y|X}(y|x) =\begin{cases}
+			\frac{f_{X,Y}(x,y)}{f_X(x)} = \frac{f_{X,Y}(x,y)}{\int_c^d f_{X,Y}(x,y)dy}, & \text{if $a\le x \le b$, $c\le y \le d$}\\
+            0, & \text{otherwise}
+		 \end{cases}$
+
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Beta, Binomial Model}
+\begin{block}{Block 1}
+If random variables $X_1, X_2, ...... , X_n$ are independent, then
+\begin{itemize}
+\item If $X_1, X_2, ......, X_n$ are jointly discrete, $p(x_1, x_2, ......., x_n) = p_{X_1}(x_1) \cdot p_{X_2}(x_2) \cdot ...... \cdot p_{X_n}(x_n)$
+\item If $X_1, X_2, ......, X_n$ are jointly continuous, $f(x_1, x_2, ......., x_n) = f_{X_1}(x_1) \cdot f_{X_2}(x_2) \cdot ...... \cdot f_{X_n}(x_n)$
+\end{itemize}
+\end{block}
+
+\begin{block}{Block 2}
+\begin{itemize}
+\item If $X,Y$ are independent and jointly discrete, and given respectively the marginal of x $p_X(x)>0$ and marginal of y $p_Y(y)>0$, then $p(x,y) = p_{X}(x) \cdot p_{Y}(y) = p_{Y|X}(y|x) \cdot p_{X}(x) = p_{X|Y}(x|y) \cdot p_{Y}(y)$
+\item If $X,Y$ are independent and jointly continuous, and given respectively the marginal of x $f_X(x)>0$ and marginal of y $f_Y(y)>0$, then $f(x,y) = f_{X}(x) \cdot f_{Y}(y) = f_{Y|X}(y|x) \cdot f_{X}(x) = f_{X|Y}(x|y) \cdot f_{Y}(y)$
+\end{itemize}
+\end{block}
+
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Normal Mean with natural conjugate prior}
+
+If $y|\mu \sim N(\mu, \sigma^2)$, assume that prior: $\mu \sim N(\xi,\tau_0^2)$
+\begin{enumerate}
+\item then posterior: 
+
+$$\mu|y \sim N\Big(\frac{\frac{n \bar y}{\sigma^2}+\frac{\xi}{\tau_0^2}}{\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}}, \frac{1}{\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}}\Big) = N(\mu_1, \tau_1^2)$$
+
+\item Bayesian Estimate: $E(\mu|y) = \frac{\frac{n \bar y}{\sigma^2}+\frac{\xi}{\tau_0^2}}{\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}}$ and $Var(\mu|y) = \frac{1}{\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}}$
+
+\item Expression: 
+$$\pi(\mu|y) \propto \pi(\mu) \cdot \pi(y|\mu)\propto exp\Bigg(-\frac{1}{2}\Big(\frac{1}{\tau^2}+\frac{n}{\sigma^2}\Big) \mu^2 + \Big(\frac{1}{\tau^2}+\frac{n}{\sigma^2}\Big)\mu \Bigg)$$
+
+$$= exp\Big(\tilde a \mu^2 + \tilde b \mu\Big)\rightarrow \tilde a = -\frac{1}{2}\Big(\frac{1}{\tau^2}+\frac{n}{\sigma^2}\Big), \tilde b =\Big(\frac{1}{\tau^2}+\frac{n}{\sigma^2}\Big) $$
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Normal Mean with natural conjugate prior}
+
+To continue, $\tilde \tau^2 = -\frac{1}{2 \tilde a} = \frac{1}{\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}}$ and $\tilde \xi = \tilde b \cdot \tilde \tau^2 = \frac{\frac{n \bar y}{\sigma^2}+\frac{\xi}{\tau_0^2}}{\frac{n}{\sigma^2}+\frac{1}{\tau_0^2}}$
+
+\begin{enumerate}
+\item Prior predictive distribution: since $E(\tilde y) = E\Big[E(\tilde y|\mu)\Big] = E(\mu) = \xi$ and $Var(\tilde y) = E\Big[Var(\tilde y|\mu)\Big] + Var\Big[E(\tilde y|\mu)\Big] = \tau^2 + \sigma^2$, we have
+
+$$\pi(\tilde y) = \int_{-\infty}^{\infty} \pi(\tilde y|\mu) \cdot \pi(\mu)d\mu \sim N(\xi, \tau^2 + \sigma^2)$$
+
+\item Posterior predictive distribution: we have
+
+$$\pi(\tilde y|y) = \int_{-\infty}^{\infty} \pi(\tilde y|\mu) \cdot \pi(\mu|y)d\mu \sim N(\tilde \xi, \tilde \tau^2 + \sigma^2)$$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Normal Variance with natural conjugate prior}
+
+\begin{enumerate}
+\item Likelihood: $\pi(y|\sigma^2) = (2\pi \sigma^2)^{-\frac{n}{2}} \cdot exp\Big(-\frac{1}{2\sigma^2}\sum_{i=1}^n(y_i-\mu)^2\Big)$
+
+\item Natural Conjugate Prior: $\pi(\sigma^2) \propto (\sigma^2)^{-\alpha -1} \cdot exp\Big(-\frac{\beta}{\sigma^2}\Big) \sim Inv-Gamma(\alpha, \beta)$
+
+\item Normalizing Constant for $\pi(\sigma^2) = \frac{\beta^\alpha}{\Gamma(\alpha)}$
+
+\item Posterior Distribution: $\pi(\sigma^2|y) \propto \pi(y|\sigma^2) \cdot \pi(\sigma^2) \propto (\sigma^2)^{-\frac{n}{2} - \alpha -1} \cdot exp\Big(-\frac{\frac{\sum_{i=1}^n (y_i - \mu)^2}{2}+ \beta}{\sigma^2}\Big)$
+
+$$\pi(\sigma^2|y) \sim Inv-Gamma\Big(\frac{n}{2} + \alpha, \frac{\sum_{i=1}^n (y_i - \mu)^2}{2} + \beta\Big)$$
+$$E(\sigma^2|y) = \frac{\tilde \beta}{\tilde \alpha -1} = \frac{\frac{\sum_{i=1}^n (y_i - \mu)^2}{2}+\beta}{\frac{n}{2}+\alpha - 1}, \frac{n}{2} + \alpha >1$$
+$$Var(\sigma^2|y) = \frac{\tilde \beta^2}{(\tilde\alpha -1)^2 (\tilde \alpha -2)} = \frac{\Big(\frac{\sum_{i=1}^n (y_i - \mu)^2}{2}+\beta\Big)^2}{(\frac{n}{2}+\alpha - 1)^2 (\frac{n}{2}+\alpha - 2)}, \frac{n}{2}+\alpha>2$$
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Normal Precision with natural conjugate prior}
+
+\begin{enumerate}
+\item Likelihood: $\pi(y|\sigma^{-2}) \propto (\sigma^{-2})^{\frac{n}{2}} \cdot exp\Big(-\frac{\sigma^{-2}}{2}\sum_{i=1}^n(y_i-\mu)^2\Big) \sim G\Big(\frac{n}{2}+1, \frac{\sum_{i=1}^n(y_i-\mu)^2}{2}\Big)$
+
+\item Natural Conjugate Prior: $\pi(\sigma^{-2}) \propto (\sigma^{-2})^{\alpha -1} \cdot exp\Big(-\beta\sigma^{-2}\Big) \sim Gamma(\alpha, \beta)$. If $\alpha \rightarrow 0, \beta \rightarrow 0$, then $\pi(\sigma^{-2}) \propto \sigma^2$, which is improper.
+
+\item Posterior Distribution: $\pi(\sigma^{-2}|y) \propto \pi(y|\sigma^{-2}) \cdot \pi(\sigma^{-2}) \propto (\sigma^{-2})^{\frac{n}{2} + \alpha -1} \cdot exp\Big(-\sigma^{-2} \cdot \Big(\frac{\sum_{i=1}^n (y_i - \mu)^2}{2}+ \beta\Big)\Big) \sim G\Big(\frac{n}{2}+\alpha, \frac{\sum_{i=1}^n (y_i - \mu)^2}{2}+ \beta\Big)$
+
+$$E(\sigma^{-2}|y) = \frac{\tilde \alpha}{\tilde \beta} = \frac{\frac{n}{2}+\alpha}{\frac{\sum_{i=1}^n (y_i - \mu)^2}{2}+ \beta}$$
+$$Var(\sigma^{-2}|y) = \frac{\tilde \alpha}{(\tilde\beta)^2} = \frac{\frac{n}{2}+\alpha}{\Big(\frac{\sum_{i=1}^n (y_i - \mu)^2}{2}+ \beta\Big)^2}$$
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Normal Precision with natural conjugate prior}
+
+\begin{enumerate}
+\item Prior predictive: Given $\tilde y|\sigma^2 \sim N(\mu,\sigma^2)$, $\pi(\tilde y) = \int_0^{\infty} \pi(\tilde y|\sigma^2) \cdot \pi(\sigma^2) d\sigma^2 = \int_0^{\infty} \frac{1}{\sqrt{2\pi \sigma^2}} exp\Big(-\frac{\tilde (y - \mu)^2}{2\sigma^2}\Big) \cdot \frac{\beta^{\alpha}}{\Gamma(\alpha)} \Big(\frac{1}{\sigma^2}\Big)^{\alpha + 1} exp\Big(-\frac{\beta}{\sigma^2}\Big) d\sigma^2 = \int_0^{\infty} \frac{\beta^{\alpha}}{\sqrt{2\pi}\Gamma(\alpha)} \cdot \Big(\frac{1}{\sigma^2}\Big)^{\alpha +\frac{1}{2} + 1} \cdot exp\Big(-\frac{1}{\sigma^2}\Big(\frac{(\tilde y - \mu)^2}{2} + \beta\Big)\Big) d\sigma^2 = \frac{\beta^{\alpha}}{\sqrt{2\pi}\Gamma(\alpha)} \cdot \frac{\Gamma(\alpha+\frac{1}{2})}{\Big(\frac{(\tilde y - \mu)^2}{2} + \beta\Big)^{\alpha+\frac{1}{2}}}$ 
+
+Therefore,
+
+$$\tilde y \sim Inv-Gamma(\alpha+\frac{1}{2}, \frac{(\tilde y - \mu)^2}{2} + \beta)$$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Normal Precision with natural conjugate prior}
+
+\begin{enumerate}
+\item Posterior predictive: $\pi(\tilde y|y) = \int_0^{\infty} \pi(\tilde y|\sigma^2) \cdot \pi(\sigma^2|y) d\sigma^2 \propto \int_0^{\infty} \frac{1}{\sqrt{2\pi \sigma^2}} exp\Big(-\frac{ (\tilde y - \mu)^2}{2\sigma^2}\Big) \cdot (\sigma^2)^{-\frac{n}{2}-\alpha-1} exp\Big(-\frac{1}{\sigma^2} \Big(\frac{\sum_{i=1}^n (y_i-\mu)^2}{2}+\beta \Big)\Big) d\sigma^2 \propto \int_0^{\infty} \Big(\frac{1}{\sigma^2}\Big)^{\frac{n}{2}+\alpha+\frac{1}{2}+1} \cdot exp\Big(-\frac{1}{\sigma^2}\Big(\frac{(\tilde y - \mu)^2}{2}+ \frac{\sum_{i=1}^n (y_i - \mu)^2}{2} + \beta\Big)\Big) d\sigma^2 \propto \frac{\Gamma(\frac{n}{2}+\alpha+\frac{1}{2})}{\Big[\frac{\tilde y-\mu)^2}{2} + \frac{\sum_{i=1}^n (y_i - \mu)^2}{2} + \beta\Big]^{\frac{n}{2}+\alpha+\frac{1}{2}}} \sim G^{-1}\Big(\frac{n}{2}+\alpha+\frac{1}{2},\frac{\tilde (y-\mu)^2}{2} + \frac{\sum_{i=1}^n (y_i - \mu)^2}{2} + \beta\Big)$ 
+
+$$\tilde y|y \sim Inv-Gamma\Big(\frac{n}{2}+\alpha+\frac{1}{2},\frac{\tilde y-\mu)^2}{2} + \frac{\sum_{i=1}^n (y_i - \mu)^2}{2} + \beta\Big)$$
+In fact, to consider all the constants, 
+$$\pi(\tilde y|y) = \frac{\Gamma(\frac{n}{2}+\alpha+\frac{1}{2})\cdot \Big[\frac{\sum_{i=1}^n(y_i-\mu)^2}{2} + \beta\Big]^{\frac{n}{2}+\alpha}}{\sqrt{2\pi} \Gamma(\frac{n}{2}+\alpha)\Big[\frac{\tilde y-\mu)^2}{2} + \frac{\sum_{i=1}^n (y_i - \mu)^2}{2} + \beta\Big]^{\frac{n}{2}+\alpha+\frac{1}{2}} }$$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Poisson model with natural conjugate prior}
+
+\begin{enumerate}
+\item Likelihood: Suppose $y = (y_1, ......, y_n)$ forms $\pi(y|\theta) = \prod_{i=1}^n \frac{\theta^{y_i}e^{-\theta}}{(y_i)!} = \frac{\theta^{\sum_{i=1}^n y_i} e^{-n\theta}}{\prod_{i=1}^n(y_i)!} \propto exp\Big(-n\theta + \sum_{i=1}^n y_i log(\theta) \Big)$
+\item Conjugate Prior: Gamma Prior $\theta \sim Gamma(\alpha,\beta) \rightarrow \pi(\theta) \propto \theta^{\alpha-1}exp(-\beta \theta)$
+\item Posterior: $\pi(\theta|y) \propto \Big(\theta^{\sum_{i=1}^n y_i} exp(-n\theta)\Big)\cdot \Big(\theta^{\alpha-1}exp(-\beta \theta)\Big) = \theta^{\sum_{i=1}^n y_i + \alpha - 1} exp\Big(-(n+\beta) \theta\Big) \sim Gamma(\sum_{i=1}^n y_i + \alpha, n+\beta)$ 
+\item Bayesian Estimates: $E(\theta|y) = \frac{\sum_{i=1}^n y_i + \alpha}{n+\beta} = \frac{\beta}{n+\beta}\cdot \frac{\alpha}{\beta} + \frac{n}{n+\beta} \bar y$
+\item Variance Estimate: $Var(\theta|y) = \frac{\sum_{i=1}^n y_i + \alpha}{(n+\beta)^2}$
+\item Posterior Mode: $Mode(\theta|y) = \frac{\sum_{i=1}^n y_i + \alpha-1}{n+\beta}$ 
+
+Here the hyperparameters $\beta$ is the count of prior observations, $\alpha$ is the sum of counts from $\beta$ prior observations.
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Poisson model with natural conjugate prior}
+
+\begin{enumerate}
+\item Limit: When $n\rightarrow \infty$, we have $E(\theta|y) \rightarrow \frac{n\bar y}{n} = \bar y$ and $Var(\theta|y) \rightarrow \frac{n\bar y}{n^2} = \frac{\bar y}{n}$
+\item Prior Predictive: $\pi(\tilde y) = \int_0^{\infty} \pi(\tilde y|\theta)\pi(\theta) d\theta = \int_0^{\infty} \frac{\theta^{\tilde y} exp(-\theta)}{\tilde y!} \cdot \frac{\beta^{\alpha}}{\Gamma(\alpha)} = \frac{\beta^{\alpha}}{\tilde y! \Gamma(\alpha)} \int_0^{\infty} \theta^{\tilde y + \alpha -1} exp(-(\beta+1)\theta) d\theta = \frac{\beta^{\alpha}}{\tilde y! \Gamma(\alpha)} \cdot \frac{\Gamma(\tilde y + \alpha)}{(\beta+1)^{\tilde y + \alpha}} = \frac{(\tilde y + \alpha -1)!}{\tilde y! (\alpha -1)!} \cdot \Big(\frac{\beta}{\beta+1}\Big)^{\alpha} \cdot \Big(\frac{1}{\beta+1}\Big)^{\tilde y} = {{\tilde y + \alpha -1}\choose{\alpha -1}} \Big(\frac{\beta}{\beta+1}\Big)^{\alpha} \cdot \Big(\frac{1}{\beta+1}\Big)^{\tilde y}$
+
+Therefore, the prior predictive distribution $\pi(\tilde y) \sim Neg-Binomial(\alpha,\beta)$, where $\alpha$ denotes the number of success until the experiment stops, $\tilde y$ denotes the number of failures and $p = \frac{\beta}{\beta+1} \rightarrow \beta = \frac{p}{1-p}$ is the odd of success.
+
+\item Expectation: $E(\tilde y) = \frac{\alpha}{\beta} = \frac{\alpha (1-p)}{p}$
+\item Variance: $Var(\tilde y) = \frac{\alpha}{\beta}\Big(1 + \frac{1}{\beta}\Big) = \frac{(1-p)\alpha}{p^2}$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Poisson model with natural conjugate prior}
+
+\begin{enumerate}
+\item Posterior Predictive: $\pi(\tilde y|y) = \frac{\Gamma(\alpha + n\bar y + \tilde y)}{\Gamma(\tilde y+1) \Gamma(\alpha+n \bar y} \cdot \Big(\frac{\beta+n}{\beta+n+1}\Big)^{\alpha + n\bar y} \Big(\frac{1}{\beta+n+1}\Big)^{\tilde y}$
+
+\item Expectation: $E(\tilde y|y) = \frac{\alpha + n \bar y}{\beta+n} = \frac{(\alpha + n\bar y) (1-p)}{p}$
+\item Variance: $Var(\tilde y) = \frac{\alpha+n \bar y}{\beta+n}\Big(1 + \frac{1}{\beta+n}\Big) = \frac{(1-p)(\alpha+n \bar y)}{p^2}$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Exponential Family}
+
+\begin{enumerate}
+\item Likelihood: $\pi(y|\phi) = h(y) c(\phi)exp(\phi t(y)) \propto c(\phi) exp(\phi t(y))$
+
+\item Conjugate Prior: $\pi(\phi|n_0,t_0) = g(n_0,t_0) c(\phi)^{n_0} exp(n_0t_0\phi) \propto c(\phi)^{n_0} exp(n_0t_0\phi)$, where $n_0$ denotes the sample size (higher $n_0$ means more informative) and $t_0$ denotes the prior expectation of $t(y)$. $g(n_0,t_0)$ is independent of $\phi$.
+\item Posterior: Given $y_i \sim^{iid} \pi(y|\phi)$, we have $\pi(\phi|y) \propto \pi(y|\phi) \cdot \pi(\phi|n_0,t_0) \propto c(\phi)^{n+n_0} exp\Big(\phi (n_0t_0 + \sum_{i=1}^n t(y_i))\Big) = \pi\Big(\phi| n_0 + n, \frac{n_0t_0+ \sum_{i=1}^n t(y_i)}{n_0+n}\Big) = \pi\Big(\phi| n_0 + n, \frac{n_0t_0+ n \bar t(y)}{n_0+n}\Big)$
+
+, where $\bar t(y) = \frac{1}{n}\sum_{i=1}^n t(y_i) $
+
+\item Binomial, Poisson, Normal, Galenshore, Gamma (Chi-square, Exponential), Beta, Dirichlet, Wishart, Inv-Wishart and Geometric distibutions are examples in exponential family.
+\item Uniform, Student's t and most mixture distributions are not in exponential family. 
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Test Reminders}
+
+Let us be careful about the following points during the exam 1:
+
+\begin{enumerate}
+\item If the notation f(x) appears on test questions, it means that X is a continuous random
+variable. On the other hand, if the notation p(x) appears on test questions, it means that X is a discrete
+random variable.
+\item Unit is important! Do try to include the unit when answering the test problems. Misplace
+unit can be a serious problem.
+\item Do not lose point by not writing the 0 otherwise, whenever you encounter a question
+asking you to write down a probability distribution.
+\item When you take a square root of variance to obtain the standard deviation, be sure to
+include the absolute value. It is because standard deviation is the positive square root of the variance.
+
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Test Reminders}
+
+Let us be careful also about the following points during the exam 1:
+
+\begin{enumerate}
+\item You need to specify the
+probability correctly. For example, "What is the probability that the reaction time for a randomly selected person is greater than 1.00 second?" Then you have to answer $P(X > 1.00)$. If the question becomes “greater than or equal to 1.00 second”
+or “at least 1.00 second”, then you should answer $P(X \ge 1.00)$ to receive full credit.
+\item To derive the standard deviation for the summation of independent random variables, say $X_1+X_2+......+X_n$,
+please compute the variance first by formula $Var(X_1 + X_2 + ...... + X_n) = Var(X_1) + ...... + Var(X_n)$.
+Then, you can take the square root to obtain the standard deviation. Do not directly add the standard
+deviations.
+
+\end{enumerate}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Useful Links}
+
+Let us watch some videos to revise the assumptions for various regression models for the exam:
+
+\begin{enumerate}
+\item Linear regression assumptions: https://www.youtube.com/watch?v=gHMTzdbpQTw
+
+\item Logistic Regression Basics: https://www.youtube.com/watch?v=uYC2eLVSpI8
+
+\item
+\end{enumerate}
+\end{frame}
+
+
+%------------------------------------------------
+
+\section{Second Section}
+\subsection{Sample Questions}
+
+
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Extra Questions}
+\begin{block}{Question 1}
+
+\end{block}
+
+\begin{block}{Solution:}
+
+\end{block}
+
+
+\end{frame}
+
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Extra Questions}
+\begin{block}{Question 2}
+
+\end{block}
+
+\begin{block}{Solution:}
+
+\end{block}
+
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\Huge{\centerline{The End}}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
