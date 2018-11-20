@@ -24,7 +24,7 @@
 % of all the themes, uncomment each in turn to see what they look like.
 
 %\usetheme{default}
-%\usetheme{AnnArbor}
+\usetheme{AnnArbor}
 %\usetheme{Antibes}
 %\usetheme{Bergen}
 %\usetheme{Berkeley}
@@ -40,7 +40,7 @@
 %\usetheme{Ilmenau}
 %\usetheme{JuanLesPins}
 %\usetheme{Luebeck}
-\usetheme{Madrid}
+%\usetheme{Madrid}
 %\usetheme{Malmoe}
 %\usetheme{Marburg}
 %\usetheme{Montpellier}
@@ -115,15 +115,6 @@ University of Michigan \\ % Your institution for the title page
 
 \subsection{Concepts} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into 
 
-\begin{frame}
-\frametitle{Bayesian and Frequentist}
-\begin{itemize}
-\item Either, or $\rightarrow$ union $P(A\cup B)$
-\item Both, all $\rightarrow$ intersection $P(A\cap B)$
-\item At least one $\rightarrow$ Complement of $P(X=0)$
-\item Neither nor $\rightarrow$ $P(A^c \cap B^c) = 1 - P(A\cup B)$ 
-\end{itemize}
-\end{frame}
 
 %------------------------------------------------
 
@@ -149,7 +140,7 @@ Let us define a joint distribution $f_{X,Y}(x,y)$ on $a\le x \le b$ and $c\le y 
 
 
 \begin{frame}
-\frametitle{Beta, Binomial Model}
+\frametitle{Independence}
 \begin{block}{Block 1}
 If random variables $X_1, X_2, ...... , X_n$ are independent, then
 \begin{itemize}
@@ -164,6 +155,40 @@ If random variables $X_1, X_2, ...... , X_n$ are independent, then
 \item If $X,Y$ are independent and jointly continuous, and given respectively the marginal of x $f_X(x)>0$ and marginal of y $f_Y(y)>0$, then $f(x,y) = f_{X}(x) \cdot f_{Y}(y) = f_{Y|X}(y|x) \cdot f_{X}(x) = f_{X|Y}(x|y) \cdot f_{Y}(y)$
 \end{itemize}
 \end{block}
+
+
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Basics:}
+\begin{itemize}
+\item Prior Predictive: $\pi(\tilde y) = \int \pi(\tilde y|\theta) \pi(\theta) d\theta$
+
+\item Posterior Predictive: $\pi(\tilde y|y) = \int \pi(\tilde y|\theta) \pi(\theta|y) d\theta$
+
+\item Bayesian Point Estimator: $\theta = E(\theta|y) = \int \theta  \pi(\theta|y) d\theta$
+
+\item Posterior Interval $1-\alpha$: $P(\theta \in C|y) = \int_C \pi(\theta|y) d\theta = 1-\alpha \rightarrow C=(l,u)$
+
+\item Posterior MSE: $MSE = bias^2 + Var(\pi(\theta|y))$
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+
+
+\begin{frame}
+\frametitle{Beta, Binomial Model}
+\begin{itemize}
+\item Likelihood and Prior: $\pi(y|\theta) \sim Bin(n,\theta), \theta \sim Beta(\alpha,\beta)$
+
+\item Posterior: $\theta|Y=y \sim Beta(y+\alpha, n-y+\beta) \rightarrow Var(\theta|y) =\frac{(y+\alpha)(n-y+\beta)}{(n+\alpha+\beta)^2 (n+\alpha+\beta+1)}$
+
+\item Prior predictive: $\pi(\tilde Y=\tilde y) = \int_0^1 \pi(\tilde Y = \tilde y|\theta) \pi(\theta|\alpha,\beta) d\theta = \frac{\Gamma(\tilde n+1)}{\Gamma(\tilde y+1)\Gamma(\tilde n-\tilde y + 1)}\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\frac{\Gamma(\tilde y + \alpha)\Gamma(\tilde n - \tilde y + \beta)}{\Gamma(\alpha+\beta+\tilde n)}$
+
+\item Posterior predictive: $\pi(\tilde Y=\tilde y|Y=y) = \int_0^1 \pi(\tilde Y = \tilde y|\theta) \pi(\theta|y, \alpha,\beta) d\theta = \frac{\Gamma(\tilde n +1)}{\Gamma(\tilde y+1)\Gamma(\tilde n - \tilde y + 1)}\frac{\Gamma(\alpha+\beta + n)}{\Gamma(\alpha+y)\Gamma(\beta+n-y)} \frac{\Gamma(\alpha+y + \tilde y)\Gamma(\beta + n - y + \tilde n - \tilde y)}{\Gamma(\alpha + \beta + n + \tilde n)}$
+\end{itemize}
+
 
 
 \end{frame}
@@ -284,7 +309,7 @@ $$\tilde y \sim Inv-Gamma(\alpha+\frac{1}{2}, \frac{(\tilde y - \mu)^2}{2} + \be
 
 $$\tilde y|y \sim Inv-Gamma\Big(\frac{n}{2}+\alpha+\frac{1}{2},\frac{\tilde y-\mu)^2}{2} + \frac{\sum_{i=1}^n (y_i - \mu)^2}{2} + \beta\Big)$$
 In fact, to consider all the constants, 
-$$\pi(\tilde y|y) = \frac{\Gamma(\frac{n}{2}+\alpha+\frac{1}{2})\cdot \Big[\frac{\sum_{i=1}^n(y_i-\mu)^2}{2} + \beta\Big]^{\frac{n}{2}+\alpha}}{\sqrt{2\pi} \Gamma(\frac{n}{2}+\alpha)\Big[\frac{\tilde y-\mu)^2}{2} + \frac{\sum_{i=1}^n (y_i - \mu)^2}{2} + \beta\Big]^{\frac{n}{2}+\alpha+\frac{1}{2}} }$$
+$$\pi(\tilde y|y) = \frac{\Gamma(\frac{(n}{2}+\alpha+\frac{1}{2})\cdot \Big[\frac{\sum_{i=1}^n(y_i-\mu)^2}{2} + \beta\Big]^{\frac{n}{2}+\alpha}}{\sqrt{2\pi} \Gamma(\frac{n}{2}+\alpha)\Big[\frac{\tilde y-\mu)^2}{2} + \frac{\sum_{i=1}^n (y_i - \mu)^2}{2} + \beta\Big]^{\frac{n}{2}+\alpha+\frac{1}{2}} }$$
 
 \end{enumerate}
 
@@ -369,95 +394,393 @@ Therefore, the prior predictive distribution $\pi(\tilde y) \sim Neg-Binomial(\a
 %------------------------------------------------
 
 \begin{frame}
+\frametitle{Non-informative Priors}
+
+\begin{enumerate}
+\item Likelihood: 
+
+
+
+\item Binomial, Poisson, Normal, Galenshore, Gamma (Chi-square, Exponential), Beta, Dirichlet, Wishart, Inv-Wishart and Geometric distibutions are examples in exponential family.
+\item Uniform, Student's t and most mixture distributions are not in exponential family. 
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Jeffrey Priors}
+
+\begin{enumerate}
+\item Objective: Determine $\pi(\theta)$ using $\pi(y|\theta)$ and determine $\pi(\phi)$ using $\pi(y|\phi)$.  
+
+\item Transformation: Given $f_X(x)$, let $Y = g(x) \rightarrow x = g^{-1}(y)$, then $f_Y(y) = f_X(g^{-1}(y)) \cdot |\frac{d g^{-1}(y)}{dy}|$
+\item Example: $f(x) = 3x^2, 0<x<1$ and $Y=X^2 = g(x) \rightarrow x = g^{-1}(y) = \sqrt{y}, 0<y<1$, we have $f_Y(y) = f_X(\sqrt{y})|\frac{d \sqrt{y}}{dy}| = 3y \frac{y^{-\frac{1}{2}}}{2} = \frac{3}{2}y^{\frac{1}{2}}, 0<y<1$.
+
+\item Jeffrey's general principle: Given the prior density $\pi(\theta)$, and $\phi = h(\theta)$, then the prior on $\phi$ is: $\pi_{\phi}(\phi) = \pi_{\theta}(h^{-1}(\phi)) |\frac{d h^{-1}(\phi)}{d\phi}|$. Any rule for determining the prior density $\pi(\theta)$ should obtain the same result if it is applied to any one-to-one transformed parameter $\phi = h(\theta)$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Jeffrey Priors}
+
+\begin{enumerate}
+\item Jeffrey's Prior: $\pi(\theta) \propto [I(\theta)]^{\frac{1}{2}} = \Bigg \{E\Big[\Big(\frac{d \log \pi(y|\theta)}{d\theta}\Big)^2|\theta\Big]\Bigg \}^{\frac{1}{2}} = \Bigg \{-E\Big[\frac{d^2 \log \pi(y|\theta)}{d\theta}|\theta\Big]\Bigg\}^{\frac{1}{2}}$
+
+\item $I(\phi) = E\left[\left\{\frac{d \log \pi(y \mid \theta)}{d \theta}\right\}^2 \bigg{|} \theta \right]  \left(\frac{d\theta}{d \phi}\right)^2$ 
+
+$\rightarrow \pi(\phi) \propto E\left[\left\{\frac{d \log \pi(y \mid \theta)}{d \theta}\right\}^2 \bigg{|} \theta \right] ^{\frac{1}{2}} \left(\frac{d\theta}{d \phi}\right)$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Jeffrey Priors for Normal Model:}
+\begin{enumerate}
+\item  When $\sigma^2$ is known, the Jeffrey's prior for $\mu$ is
+$$y \sim N(\mu, \sigma^2) \rightarrow log(y|\mu) \propto -\frac{1}{2\sigma^2} \sum_{i=1}^n (y_i - \mu)^2 \rightarrow \frac{d^2log(y|\mu)}{d\mu^2} = -\frac{n}{\sigma^2}$$ 
+
+$$\pi(\mu ) \propto \sqrt{I(\mu)}  = \sqrt{-E\Big[\frac{-n}{\sigma^2}\Big]} \propto 1$$
+
+\item  When $\mu$ is known, the Jeffrey's prior for $\sigma^2$: $log(y|\sigma^2) = - \frac{n}{2}log(2\pi) - \frac{n}{2}log(\sigma^2) -\frac{1}{2\sigma^2} \sum_{i=1}^n (y_i - \mu)^2 \rightarrow \frac{d^2log(y|\sigma^2)}{d(\sigma^2)^2} = \frac{n}{2(\sigma^2)^2} - \frac{1}{(\sigma^2)^3} \sum_{i=1}^n (y_i - \mu)^2$
+
+$\pi(\sigma^2) \propto \sqrt{I(\sigma^2)}  \propto \sqrt{-E\Big[\frac{n}{2(\sigma^2)^2} - \frac{1}{(\sigma^2)^3} \sum_{i=1}^n (y_i - \mu)^2\Big]} = \sqrt{\frac{n\sigma^2}{(\sigma^2)^3}-\frac{n}{2(\sigma^2)^2}}=\sqrt{\frac{n}{2(\sigma^2)^2}} \propto \frac{1}{\sigma^2}$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Jeffrey Priors for Normal Model:}
+\begin{enumerate}
+\item  Jeffrey's prior for $\mu^3$: Take $\phi = \mu^3 \rightarrow \mu = \phi^{\frac{1}{3}}, \frac{d\mu}{d\phi} = \frac{1}{3} \phi^{-\frac{2}{3}}$
+
+$\pi(\phi) = \pi(\mu) \cdot |\frac{1}{3}\phi^{-\frac{2}{3}}| \propto 1 \cdot \phi^{-\frac{2}{3}} = \phi^{-\frac{2}{3}} = \mu^{-2}$
+
+\item  Jeffrey's prior for $log(\sigma^2)$: Take $\phi = log(\sigma^2) \rightarrow \sigma^2 = e^{\phi} \rightarrow \frac{d\sigma^2}{d\phi} = e^{\phi}$
+
+$\pi(\phi) = \pi(\sigma^2) \cdot |e^{\phi}| \propto \frac{1}{\sigma^2} \cdot \sigma^2 = 1$
+
+\item  Jeffrey's prior for $\mu,\sigma^{-2}$ unknown: $\pi(y|\mu,\sigma^{-2}) \propto (\sigma^{-2})^{\frac{n}{2}} exp\Big(-\frac{\sigma^{-2}}{2}[(n-1)s^2 + n(\bar y-\mu)^2]\Big)$
+
+$log\Big(\pi(y|\mu,\sigma^{-2})\Big) \propto \frac{n}{2} log(\sigma^{-2}) -\frac{\sigma^{-2}}{2}(n-1)s^2 -\frac{\sigma^{-2}}{2}n(\bar y-\mu)^2$
+Taking first and second derivatives, we get: $I(\mu,\sigma^{-2}) = $
+
+$\pi(\mu,\sigma^{-2}) \propto \sqrt{I(\mu,\sigma^{-2})} \propto \frac{1}{\sigma}$
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Jeffrey Priors for Binomial Model:}
+\begin{enumerate}
+\item  Jeffrey's prior for $y \sim Bin(n,\theta) \rightarrow \pi(y|\theta) \propto \theta^y(1-\theta)^{n-y}$
+
+$log(\pi(y|\theta) \propto yln\theta + (n-y)ln(1-\theta) \rightarrow \frac{d^2log(\pi(y|\theta)}{d\theta^2} = -\frac{y}{\theta^2} - \frac{n-y}{(1-\theta)^2} = \frac{-y(1-\theta)^2-(n-y)\theta^2}{\theta^2 (1-\theta)^2} = \frac{-y+2\theta y - n\theta^2}{\theta^2 (1-\theta)^2} \ \ \ \Big(E(y) = n\theta\Big)$
+
+$I(\theta) = -E\Big[ \frac{-y+2\theta y - n\theta^2}{\theta^2 (1-\theta)^2}\Big] = \frac{n}{\theta(1-\theta)}$
+$\rightarrow \pi(\theta) \propto \theta^{-\frac{1}{2}} (1-\theta)^{-\frac{1}{2}} \sim Beta(\frac{1}{2},\frac{1}{2})$
+
+\item  Jeffrey's prior for $logit(\theta)$: Take $\phi = logit(\theta) \rightarrow \theta = \frac{exp(\phi)}{1+exp(\phi)}, \frac{d\theta}{d\phi} = \frac{exp(\phi)}{(1+exp(\phi))^2}$
+
+$\pi(\phi) \propto \pi(\theta) \cdot |\frac{exp(\phi)}{(1+exp(\phi))^2}| \propto \theta^{-\frac{1}{2}} (1-\theta)^{-\frac{1}{2}} \cdot |\theta (1-\theta)|  = \theta^{\frac{1}{2}} (1-\theta)^{\frac{1}{2}}$
+
+\end{enumerate}
+
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Marginal Posterior Probability}
+
+\begin{enumerate}
+\item Continuous Case: Let $\theta = (\theta_1, \theta_2)$ then $\pi(\theta_1,y) = \int \pi(y|\theta_1,\theta_2) \pi(\theta_1,\theta_2) d\theta_2 \rightarrow \pi(\theta_1|y) = \frac{\pi(\theta_1,y)}{p(y)} = \int \frac{\pi(y|\theta_1,\theta_2) \pi(\theta_1,\theta_2)}{p(y)} d\theta_2$
+
+\item Since $\pi(\theta_1|y)$ is independent of y, $\pi(\theta_1|y) \propto \pi(\theta_1,y) = \int \pi(y|\theta_1,\theta_2) \pi(\theta_1,\theta_2) d\theta_2$
+
+\item Discrete Example: Let $y \in \{0,1 \}, \theta_1 \in \{0,1 \}, \theta_2 \in \{0,1 \}$ If $\pi(y=1) = 0.3 \theta_1 + 0.2 \theta_2$, $\pi(\theta_1 =1) = 0.5$, $\pi(\theta_2 = 1) = 0.1$. If $\{y_1,y_2,y_3 \} = \{1,1,1 \}$, then $$\pi(\theta_1,\theta_2|y) \propto 0.3\theta_1 + 0.2\theta_2)^3 \cdot 0.5^{\theta}0.5^{1-\theta_1}0.1^{\theta_2}0.9^{1-\theta_2}$$
+Hence, $\underbrace{\pi(\theta_1|y)}_{\text{unnormalized}} \propto \sum_{\theta_2=(0,1)} \pi(\theta_1,\theta_2|y) \propto (0.3\theta_1)^3\cdot 0.5 \cdot 0.9 + (0.3\theta_1+ 0.2)^3 \cdot 0.5 \cdot 0.1$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Joint Posterior Probability for Normal}
+
+\begin{enumerate}
+\item $p(\mu,\sigma^2|y) \propto (\sigma^{-2}) (\sigma^{-n}) \cdot exp\Big(-\frac{1}{2\sigma^2}\sum_{i=1}^n (y_i-\mu)^2\Big) = \sigma^{-n-2}exp\Big(-\frac{1}{2\sigma^2}[\sum_{i=1}^n (y_i-\bar y)^2 + n(\bar y - \mu)^2]\Big) = \sigma^{-n-2}exp\Big(-\frac{1}{2\sigma^2}[(n-1)s^2 + n(\bar y - \mu)^2]\Big)$
+
+\item Keeping $\sigma^2$ constant, we have $\pi(\mu|\sigma^2,y) \propto exp\Big(-\frac{1}{2\sigma^2}n(\bar y - \mu)^2\Big) \sim N(\bar y, \frac{\sigma^2}{n})$
+
+\item We can integrate out $\mu$ now: $\pi(\sigma^2|y) = \int \sigma^{-n-2} exp\Big(-\frac{1}{2\sigma^2}[(n-1)s^2 + n(\bar y - \mu)^2]\Big) d\mu = \sigma^{-n-2} exp\Big(-\frac{1}{2\sigma^2}(n-1)s^2\Big) \cdot \sqrt{2\pi\frac{\sigma^2}{n}} \propto (\sigma^2)^{-\frac{n+1}{2}}exp\Big(-\frac{1}{2\sigma^2}(n-1)s^2\Big) $
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Joint Posterior Probability for Normal}
+
+\begin{enumerate}
+\item $p(\mu,\sigma^2|y) \propto (\sigma^{-2}) (\sigma^{-n}) \cdot exp\Big(-\frac{1}{2\sigma^2}\sum_{i=1}^n (y_i-\mu)^2\Big) = \sigma^{-n-2}exp\Big(-\frac{1}{2\sigma^2}[\sum_{i=1}^n (y_i-\bar y)^2 + n(\bar y - \mu)^2]\Big) = \sigma^{-n-2}exp\Big(-\frac{1}{2\sigma^2}[(n-1)s^2 + n(\bar y - \mu)^2]\Big)$
+
+\item Keeping $\sigma^2$ constant, we have $\pi(\mu|\sigma^2,y) \propto exp\Big(-\frac{1}{2\sigma^2}n(\bar y - \mu)^2\Big) \sim N(\bar y, \frac{\sigma^2}{n})$
+
+\item We can integrate out $\mu$ now: $\pi(\sigma^2|y) = \int \sigma^{-n-2} exp\Big(-\frac{1}{2\sigma^2}[(n-1)s^2 + n(\bar y - \mu)^2]\Big) d\mu = \sigma^{-n-2} exp\Big(-\frac{1}{2\sigma^2}(n-1)s^2\Big) \cdot \sqrt{2\pi\frac{\sigma^2}{n}} \propto (\sigma^2)^{-\frac{n+1}{2}}exp\Big(-\frac{1}{2\sigma^2}(n-1)s^2\Big) $
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Bayesian Estimate Interval}
+
+\begin{enumerate}
+\item $\mu|\sigma^2,Y \sim N\Big(E(\mu|Y),Var(\mu|Y)\Big)$ 
+
+\item If $\sigma$ is known: $\mu = E(\mu|Y) \pm z_{0.975} SD(\mu|Y)$
+
+\item If $\sigma$ is unknown: $\mu = E(\mu|Y) \pm t_{0.975,n+2a} SD(\mu|Y)$
+
+\item In Bayesian, we do not have true estimator, so the randomness comes from the prior and what we observed is fixed. That is why there is no Standard Error in Bayesian framework.
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Bayesian MAP vs MLE:}
+
+\begin{enumerate}
+\item MAP estimate is the posterior mode $\hat \theta_{MAP} = argmax_{\theta} \pi(\theta|Y)$, while MLE maximizes the likelihood: $\hat \theta_{MLE} = argmax_{\theta} \pi(Y|\theta) = argmax_{\theta} \pi(\theta|y_1,......y_n) \pi(\theta) = argmax_{\theta} \Big[\sum_{i=1}^n log\pi(\theta|y_i) + log(\pi(\theta))\Big]$  
+
+\item Binomial Example: $y|\theta \sim Bin(n,\theta), \theta\sim Beta(0.5,0.5)$, then $\pi(\theta|y) \propto {{n}\choose{y}} \theta^{y} (1-\theta)^{n-y} \frac{\Gamma(1)}{\Gamma(0.5)\Gamma(0.5)} \theta^{0.5-1}(1-\theta)^{0.5-1}$. 
+We take log and set the derivative as 0: $log[\theta^{y-0.5} (1-\theta)^{n-y-0.5}] = (y-0.5) log\theta + (n-y-0.5) log(1-\theta) \rightarrow \frac{\partial log(\pi(\theta|y))}{\partial \theta} = \frac{y-0.5}{\theta} - \frac{n-y-0.5}{1-\theta} = 0 \rightarrow \hat \theta_{MAP} = \frac{y-0.5}{n-1}$ 
+
+\item Generally, $\theta \sim Beta(\alpha_1,\alpha_2)$, so take log we have $log[\theta^{y+\alpha_1 - 1} (1-\theta)^{n-y + \alpha_2-1}] = (y+\alpha_1-1) log\theta + (n-y+\alpha_2-1) log(1-\theta) \righarrow \frac{\partial log(\pi(\theta|y))}{\partial \theta} = \frac{y+\alpha_1 - 1}{\theta} - \frac{n-y + \alpha_2-1}{1-\theta} = 0 \rightarrow \hat \theta_{MAP} = \frac{y+\alpha_1 - 1}{n + \alpha_1 + \alpha_2 -2}$
+
+\item Dirichlet: $\hat p_i_{MAP} = \frac{x_i + k}{n + mk}$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Bayesian MAP (Normal):}
+
+\begin{enumerate}
+\item Normal Example: $y|\mu \sim N(\mu, \sigma^2), \mu \sim N(\mu_0, \sigma_0^2)$, then $\pi(\mu|y)$
+
+$= \frac{1}{2\pi\sqrt{\sigma_0^2}}exp\Big(-\frac{1}{2\sigma_0^2}(\mu-\mu_0)^2\Big) \cdot \Big(\frac{1}{2\pi\sqrt{\sigma^2}}\Big)^n exp\Big(-\frac{1}{2\sigma^2} \sum_{i=1}^n (y_i - \mu)^2\Big) = \Big(\frac{1}{\sqrt{2\pi}}\Big)^{n+1} (\sigma_0^2)^{-\frac{1}{2}} (\sigma^2)^{-\frac{n}{2}} exp \Big(-(\frac{1}{2\sigma^2_0} + \frac{n}{2\sigma^2}) \mu^2 + (\frac{\mu_0}{\sigma_0^2} + \frac{\sum_{i=1}^n y_i}{\sigma^2})\mu  - (\frac{\mu_0}{2\sigma_0^2} + \frac{\sum_{i=1}^n x_i^2}{2\sigma^2}\Big) \sim N\Big(\frac{\frac{\mu_0}{\sigma_0^2} + \frac{\sum_{i=1}^n y_i}{\sigma^2}}{\frac{1}{\sigma^2_0} + \frac{n}{\sigma^2}}, \frac{1}{\frac{1}{\sigma^2_0} + \frac{n}{\sigma^2}}\Big)$
+
+
+\item Take log: $log(\pi(\mu|y)) = -(\frac{1}{2\sigma^2_0} + \frac{n}{2\sigma^2}) \mu^2 + (\frac{\mu_0}{\sigma_0^2} + \frac{\sum_{i=1}^n y_i}{\sigma^2})\mu + C$
+
+\item Take derivative as 0: $-(\frac{1}{\sigma^2_0} + \frac{n}{\sigma^2})\mu + (\frac{\mu_0}{\sigma_0^2} + \frac{\sum_{i=1}^n y_i}{\sigma^2}) = 0$ 
+
+$\rightarrow \hat \mu_{MAP} = \frac{\frac{\mu_0}{\sigma_0^2} + \frac{\sum_{i=1}^n y_i}{\sigma^2}}{\frac{1}{\sigma^2_0} + \frac{n}{\sigma^2}} = \frac{\mu_0 \sigma^2 + \sigma_0^2 \sum_{i=1}^n y_i}{\sigma^2 + \sigma_0^2 n}$
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Bayesian CLT:}
+
+\begin{enumerate}
+\item Case 1: For large n, suppose $X_1,X_2, .....,X_n$ are conditionally independent given $\Theta = \theta$
+
+\item Let $c = E\Big(\Theta|X_1 = x_1, X_2 = x_2, ......, X_n = x_n\Big)$ be the posterior mean and $d^2 = Var\Big(\Theta|X_1 = x_1, X_2 = x_2, ......, X_n = x_n\Big)$, then if U is the posterior distribution, we have $\frac{U-c}{d} \sim^{CLT} N(0,1)$
+
+\item Bernstein-von Mises Theorem: Under some regularities conditions, as $n \rightarrow \infty$, the posterior distribution of $\theta$ approaches normality with mean $\theta_0$ and variance $\frac{1}{nI(\theta_0)}$. Now we consider the posterior mode as $\hat \theta_{MAP}$ and $\hat \theta_{MAP}$ is consistent ($\hat \theta_{MAP} \rightarrow \theta_0, n\rightarrow \infty)$
+
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Bayesian CLT Proof:}
+
+\begin{enumerate}
+\item By Taylor expansion (centered by $\hat \theta_{MAP}$, we have $log \pi(\theta|y) \approx log \pi(\hat \theta_{MAP}) + (\theta - \hat \theta_{MAP}) \frac{d}{d\theta}log \pi(\hat \theta_{MAP}) + \frac{1}{2} (\theta - \hat \theta_{MAP})^2 \frac{d^2}{d\theta^2}log \pi(\hat \theta_{MAP}) = C - \frac{1}{2} \frac{(\theta - \hat \theta_{MAP})^2}{(nI(\hat \theta_{MAP}))^{-1}} \sim C - \frac{1}{2} \Big(\frac{\theta-\mu}{\sigma}\Big)^2$ 
+
+\item It looks like normal if we take $\mu= \hat\theta_{MAP}, \sigma^2 = -\Big(\frac{d^2}{d\theta^2}log \pi(\theta|y)\Big)^{-1}$
+
+\item Take exponential, $\pi(\theta|y) \approx exp\Big( C -\frac{1}{2} \frac{(\theta - \hat \theta_{MAP})^2}{(nI(\hat \theta_{MAP}))^{-1}}\Big) \sim N(\hat \theta_{MAP}, \Big(nI(\hat \theta_{MAP}\Big)^{-1})$
+
+\item The (j,k) element of the information matrix I is given by: $-\frac{\partial^2}{\partial \theta_j \partial \theta_k} log(\pi(\theta|y))$, evaluated at $\hat \theta_{MAP}$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Gibbs Sampling for Gaussian Model}
+
+\begin{enumerate}
+\item Rule: To do Gibbs Sampling, we start from deriving the joint posterior distribution. From that joint posterior distribution, we derive the full conditionals for each parameter FC1, FC2, and so on. The resulting full conditional distributions should have one parameter taking all other parameters as fixed and known. 
+
+\item Likelihood: Independent $Y_i| \mu,\sigma^2 \sim N(\mu,\sigma^2)$
+\item Priors: $\mu \sim N(\mu_0,\sigma_0^2)$, $\sigma^2 \sim Inv-Gamma(a,b)$
+\item Joint Posterior distribution: $\pi(\mu,\sigma^2|Y) \propto \pi(Y|\mu,\sigma^2) \pi(\mu) \pi(\sigma^2) \propto \Big(\sqrt{\frac{1}{\sigma^2}}\Big)^n exp \Big(-\frac{\sum_{i=1}^n(y_i -\mu)^2}{2\sigma^2}\Big) \cdot \frac{1}{\sigma_0^2} exp\Big(-\frac{(\mu-\mu_0)^2}{2\sigma_0^2}\Big) \Big(\frac{1}{\sigma^2}\Big)^{a+1}exp\Big(-\frac{b}{\sigma^2}\Big)$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Gibbs Sampling for Gaussian Model}
+
+\begin{enumerate}
+\item FC1 ($\sigma^2$ known): $\pi(\mu|\sigma^2,Y) \propto exp\Big(-\frac{\sum_{i=1}^n(y_i-\mu)^2}{2\sigma^2} - \frac{(\mu-\mu_0)^2}{2\sigma_0^2}\Big) \propto exp\Big(-(\frac{1}{2\sigma^2_0} + \frac{n}{2\sigma^2}) \mu^2 + (\frac{\mu_0}{\sigma_0^2} + \frac{\sum_{i=1}^n y_i}{\sigma^2})\mu\Big) \sim N\Big(\frac{\frac{\mu_0}{\sigma_0^2} + \frac{\sum_{i=1}^n y_i}{\sigma^2}}{\frac{1}{\sigma^2_0} + \frac{n}{\sigma^2}}, \frac{1}{\frac{1}{\sigma^2_0} + \frac{n}{\sigma^2}}\Big)$
+
+\item FC2 ($\mu$ known): $\pi(\sigma^2|\mu,Y) \propto \Big(\frac{1}{\sigma^2}\Big)^{\frac{n}{2}} \cdot exp\Big(-\frac{\sum_{i=1}^n(y_i-\mu)^2}{2\sigma^2}\Big) \cdot \Big(\frac{1}{\sigma^2}\Big)^{a+1} \cdot exp\Big(-\frac{b}{\sigma^2}\Big) = \Big(\frac{1}{\sigma^2}\Big)^{\frac{n}{2}+a+1} \cdot exp\Big(-\frac{\frac{1}{2}\sum_{i=1}^n(y_i-\mu)^2 + b}{\sigma^2}\Big) \sim Inv-Gamma\Big(\frac{n}{2}+a, \frac{1}{2}\sum_{i=1}^n(y_i-\mu)^2 + b\Big)$
+
+\item Full conditional distribution is proportional to the joint density
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Gibbs Sampling Algorithm and Convergence}
+
+\begin{enumerate}
+\item Gibbs Sampling is a special case of Metropolis Hasting Algorithm.
+
+\item We first set initial value $\theta^{(0)} = (\theta_1^{(0)}, \theta_2^{(0)},......, \theta_p^{(0)})$. The for each iteration t, we draw FC1, FC2, ......, FCp. Namely, 
+
+\item FC1: $\pi(\theta_1^{(t)}|\theta_2^{(t-1)}, \theta_3^{(t-1)},......,\theta_p^{(t-1)})$
+\item FC2: $\pi(\theta_2^{(t)}|\theta_2^{(t)}, \theta_3^{(t-1)},......,\theta_p^{(t-1)})$, 
+\item FC3: $\pi(\theta_3^{(t)}|\theta_1^{(t)}, \theta_2^{(t)},\theta_4^{(t-1)}......,\theta_p^{(t-1)})$,......, 
+\item FCp: $\pi(\theta_p^{(t)}|\theta_1^{(t)}, \theta_2^{(t)},......,\theta_{p-1}^{(t)})$
+
+\item We run the for loop S times to obtain posterior draws: $\theta^{(1)}, ......, \theta^{(S)}$
+
+\item For convergence, we decide that the time T is sufficient for convergence and we discard the first S-T iterations (the first T samples as "burn-in"). Then the approximate posterior mean of $\theta_j$ is $E(\theta_j|Y) \approx \frac{1}{S-T} \sum_{s = S-T+1}^S \theta_j^{(s)}$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Practice for Deriving Full Conditional}
+
+\begin{enumerate}
+\item Given $Y|\lambda,b \sim Poisson(\lambda), \lambda|b \sim Gamma(1,b), b\sim Gamma(1,1)$
+
+\item Probability distributions: $\pi(Y|\lambda,b) = \frac{e^{-\lambda}\lambda^Y}{Y!}, \pi(\lambda|b) = b exp(-b\lambda), \pi(b) = 1 \cdot exp(-b)$
+
+\item Method: Estimate $\lambda$ using Y and estimate b using $\lambda$.
+
+\item Full Conditionals: $\pi(\lambda|b,Y) \propto \pi(Y|\lambda,b) \cdot \pi(\lambda|b) \propto  e^{-\lambda}\lambda^Y \cdot exp(-b\lambda) = \lambda^{Y+1-1} exp(-(b+1)\lambda) \sim Gamma(Y+1,b+1)$
+
+\item Full Conditionals (y is constant): $\pi(b|\lambda,Y) \propto \pi(\lambda|b) \cdot \pi(b) \propto b exp(-b\lambda) \cdot exp(-b) = b^{2-1} exp(-b(\lambda+1)) \sim Gamma(2,\lambda+1)$
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Metropolis Sampling}
+
+\begin{enumerate}
+\item Situation: Prior is not conjugate ($Y|\mu \sim N(\mu,1), \mu \sim Beta(a,b)$), not knowing how to make a draw from the FC.
+\item $\theta_j^c|\theta_j^* \sim Normal(\theta_j^*,s_j^2) \rightarrow \pi(\theta_j^c|\theta_j^*) = \frac{1}{\sqrt{2\pi s_j^2}} exp\Big(-\frac{1}{2 s_j^2} (\theta_j^c - \theta_j^*)^2\Big)$
+\item $\theta_j^*|\theta_j^c \sim Normal(\theta_j^c,s_j^2) \rightarrow \pi(\theta_j^*|\theta_j^c) = \frac{1}{\sqrt{2\pi s_j^2}} exp\Big(-\frac{1}{2 s_j^2} (\theta_j^* - \theta_j^c)^2\Big)$
+
+\item We propose a random candidate model based on current trials: $\theta_j^c \sim Normal(\theta_j^*, s_j^2)$
+
+\item Metropolis sampling is a version of rejection sampling. The acceptance probability is 
+$$R = min \Big\{1, \frac{p(\theta_j^c|\theta_{(j)},Y)}{p(\theta_j^*|\theta_{(j)},Y)} \Big\}$$ 
+
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Metropolis Hasting Algorithm}
+
+\begin{enumerate}
+\item Situation: With asymmetric candidate distributions.
+
+\item The acceptance probability is 
+$$R = min \Big\{1, \frac{\frac{p(\theta_j^c|\theta_{(j)},Y)}{p(\theta_j^*|\theta_{(j)},Y)}}{\frac{q(\theta_j^c|\theta_{(j)}^*)}{q(\theta_j^*|\theta_{(j)}^c)}} \Big\}$$ 
+
+\item If we take $\theta_j^c \sim p(\theta_j^c|\theta_{(j)},Y)$, and let $A = \frac{p(\theta_1^c,\theta_2^c,......,\theta_p^c|Y)}{p(\theta_1^*,\theta_2^*,......,\theta_p^*|Y}$, we propose for $\theta_j^c$ and $\theta_j^*$ by updating from $\theta_j^*$ and $\theta_j^c$, respectively:
+
+$p(\theta_1^c|\theta_2^*,......,\theta_p^*,Y) \cdot p(\theta_2^c|\theta_1^c,\theta_3^*......,\theta_p^*,Y) \cdot ...p(\theta_p^c|\theta_1^c,......,\theta_{p-1}^c,Y) $ 
+
+$p(\theta_1^*|\theta_2^c,......,\theta_p^c,Y) \cdot p(\theta_2^*|\theta_1^*,\theta_3^c......,\theta_p^c,Y) \cdot ...p(\theta_p^*|\theta_1^*,......,\theta_{p-1}^*,Y)$
+
+Using the backward substitution for conditional distributions, we obtain 
+$$B = \frac{p(\theta_1^c|\theta_2^*,......,\theta_p^*,Y) \cdot ...p(\theta_p^c|\theta_1^c,......,\theta_{p-1}^c,Y)}{p(\theta_1^*|\theta_2^c,......,\theta_p^c,Y) \cdot ...p(\theta_p^*|\theta_1^*,......,\theta_{p-1}^*,Y)} = A \rightarrow R =  1$$
+
+\end{enumerate}
+
+\end{frame}
+
+%------------------------------------------------
+
+
+\begin{frame}
 \frametitle{Test Reminders}
 
-Let us be careful about the following points during the exam 1:
+Let us look at the natural conjugate priors for exam 1:
 
 \begin{enumerate}
-\item If the notation f(x) appears on test questions, it means that X is a continuous random
-variable. On the other hand, if the notation p(x) appears on test questions, it means that X is a discrete
-random variable.
-\item Unit is important! Do try to include the unit when answering the test problems. Misplace
-unit can be a serious problem.
-\item Do not lose point by not writing the 0 otherwise, whenever you encounter a question
-asking you to write down a probability distribution.
-\item When you take a square root of variance to obtain the standard deviation, be sure to
-include the absolute value. It is because standard deviation is the positive square root of the variance.
+
+\item Dirichlet is the conjugate prior for multinomial distribution.
 
 \end{enumerate}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{Test Reminders}
-
-Let us be careful also about the following points during the exam 1:
-
-\begin{enumerate}
-\item You need to specify the
-probability correctly. For example, "What is the probability that the reaction time for a randomly selected person is greater than 1.00 second?" Then you have to answer $P(X > 1.00)$. If the question becomes “greater than or equal to 1.00 second”
-or “at least 1.00 second”, then you should answer $P(X \ge 1.00)$ to receive full credit.
-\item To derive the standard deviation for the summation of independent random variables, say $X_1+X_2+......+X_n$,
-please compute the variance first by formula $Var(X_1 + X_2 + ...... + X_n) = Var(X_1) + ...... + Var(X_n)$.
-Then, you can take the square root to obtain the standard deviation. Do not directly add the standard
-deviations.
-
-\end{enumerate}
-\end{frame}
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{Useful Links}
-
-Let us watch some videos to revise the assumptions for various regression models for the exam:
-
-\begin{enumerate}
-\item Linear regression assumptions: https://www.youtube.com/watch?v=gHMTzdbpQTw
-
-\item Logistic Regression Basics: https://www.youtube.com/watch?v=uYC2eLVSpI8
-
-\item
-\end{enumerate}
-\end{frame}
-
-
-%------------------------------------------------
-
-\section{Second Section}
-\subsection{Sample Questions}
-
-
-
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{Extra Questions}
-\begin{block}{Question 1}
-
-\end{block}
-
-\begin{block}{Solution:}
-
-\end{block}
-
-
-\end{frame}
-
-
-%------------------------------------------------
-
-\begin{frame}
-\frametitle{Extra Questions}
-\begin{block}{Question 2}
-
-\end{block}
-
-\begin{block}{Solution:}
-
-\end{block}
-
-
 \end{frame}
 
 %------------------------------------------------
